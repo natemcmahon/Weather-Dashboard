@@ -3,10 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="./Develop/style.css" />
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <h1>Weather Dashboard </h1>
+    </header>
+    <section class="d-flex col-3">
+        <h2>Search for a City:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="City" aria-label="City Entry" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
+          </div>
+    </section>
+    <section id="previousSearches" class="d-flex col-3">
+        <ol>
+        </ol>
+    </section>
+    <section class="d-flex col-9">
+        <h2 id="city-name"></h2>
+        <p id="current-temp"></p>
+        <p id="current-wind"></p>
+        <p id="current-humidity"></p>
+    </section>
+    <section class="d-flex col-9">
+        <h3>5 Day Forecast:</h3>
+        <div class="five-day">
+            <h2 id="day-two-date">Date</h2>
+            <p id="current-temp"></p>
+            <p id="current-wind"></p>
+            <p id="current-humidity"></p>
+        </div>
+        <div class="five-day">
+            <h4 id="day-three-date">Date</h4>
+            <p id="current-temp"></p>
+            <p id="current-wind"></p>
+            <p id="current-humidity"></p>
+        </div>
+        <div class="five-day">
+            <h4 id="day-four-date">Date</h4>
+            <p id="current-temp"></p>
+            <p id="current-wind"></p>
+            <p id="current-humidity"></p>
+        </div>
+        <div class="five-day">
+            <h4 id="day-five-date">Date</h4>
+            <p id="current-temp"></p>
+            <p id="current-wind"></p>
+            <p id="current-humidity"></p>
+        </div>
+        <div class="five-day">
+            <h4 id="day-six-date">Date</h4>
+            <p id="current-temp"></p>
+            <p id="current-wind"></p>
+            <p id="current-humidity"></p>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./Develop/script.js"></script>
 </body>
 </html>
