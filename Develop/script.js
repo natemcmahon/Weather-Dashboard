@@ -1,14 +1,47 @@
 var pastSearchesList = document.getElementById('previousSearches');
 var searchButton = $('#search-button');
 var currentCity = $('#city-name');
+var todayDate = $('#current-date');
 var todayTemp = $('#current-temp');
 var todayWind = $('#current-wind');
 var todayHumidity = $('#current-humidity');
+
+// Five Day
+var dateEl2 = $('#day-two-date');
+var tempEl2 = $('#day-two-temp');
+var windEl2 = $('#day-two-wind');
+var humidEl2 = $('#day-two-humidity');
+var dateEl3 = $('#day-three-date');
+var tempEl3 = $('#day-three-temp');
+var windEl3 = $('#day-three-wind');
+var humidEl3 = $('#day-three-humidity');
+var dateEl4 = $('#day-four-date');
+var tempEl4 = $('#day-four-temp');
+var windEl4 = $('#day-four-wind');
+var humidEl4 = $('#day-four-humidity');
+var dateEl5 = $('#day-five-date');
+var tempEl5 = $('#day-five-temp');
+var windEl5 = $('#day-five-wind');
+var humidEl5 = $('#day-five-humidity');
+var dateEl6 = $('#day-six-date');
+var tempEl6 = $('#day-six-temp');
+var windEl6 = $('#day-six-wind');
+var humidEl6 = $('#day-six-humidity');
+
+
 
 var searchText;
 
 var latLongAPI;
 var apiKey = 'fd960d184c53e4f03c025257c7047935';
+
+var currentDate = dayjs().format('MMM D, YYYY');
+var dayTwoDate = dayjs().add(1, "day").format('MMM D, YYYY');
+var dayThreeDate = dayjs().add(2, "day").format('MMM D, YYYY');
+var dayFourDate = dayjs().add(3, "day").format('MMM D, YYYY');
+var dayFiveDate = dayjs().add(4, "day").format('MMM D, YYYY');
+var daySixDate = dayjs().add(5, "day").format('MMM D, YYYY');
+
 
 searchButton.on('click', function (event) {
     // console.log(event);
@@ -49,19 +82,47 @@ searchButton.on('click', function (event) {
             console.log("current temp in Degrees C: " + currentTemp);
 
             currentCity.html(searchText);
-            todayTemp.html(currentTemp + " Degrees C");
-            todayWind.html(currentWind + " mph");
-            todayHumidity.html(currentHumidity + "%");
+            todayDate.html(currentDate);
+            todayTemp.html("Temp: " + currentTemp + "&deg C");
+            todayWind.html("Wind: " + currentWind + " mph");
+            todayHumidity.html("Humidity: " + currentHumidity + "%");
 
-            var dayTwoTemp = data.list[7].main.temp - 273.15;
-            var dayThreeTemp = data.list[15].main.temp - 273.15;
-            var dayFourTemp = data.list[23].main.temp - 273.15;
-            var dayFiveTemp = data.list[31].main.temp - 273.15;
-            var daySixTemp = data.list[39].main.temp - 273.15;
+            dateEl2.html(dayTwoDate);
+            tempEl2.html("Temp: " + (data.list[7].main.temp - 273.15) + '&deg C');
+            windEl2.html("Wind: " + (data.list[7].wind.speed) + ' MPH');
+            humidEl2.html("Humidity: " + (data.list[7].main.humidity) + '%');
 
-            console.log(daySixTemp);
+            dateEl3.html(dayThreeDate);
+            tempEl3.html("Temp: " + (data.list[15].main.temp - 273.15) + '&deg C');
+            windEl3.html("Wind: " + (data.list[15].wind.speed) + ' MPH');
+            humidEl3.html("Humidity: " + (data.list[15].main.humidity) + '%');
+
+            dateEl4.html(dayFourDate);
+            tempEl4.html("Temp: " + (data.list[23].main.temp - 273.15) + '&deg C');
+            windEl4.html("Wind: " + (data.list[23].wind.speed) + ' MPH');
+            humidEl4.html("Humidity: " + (data.list[23].main.humidity) + '%');
+
+            dateEl5.html(dayFiveDate);
+            tempEl5.html("Temp: " + (data.list[31].main.temp - 273.15) + '&deg C');
+            windEl5.html("Wind: " + (data.list[31].wind.speed) + ' MPH');
+            humidEl5.html("Humidity: " + (data.list[31].main.humidity) + '%');
+
+            dateEl6.html(daySixDate);
+            tempEl6.html("Temp: " + (data.list[39].main.temp - 273.15) + '&deg C');
+            windEl6.html("Wind: " + (data.list[39].wind.speed) + ' MPH');
+            humidEl6.html("Humidity: " + (data.list[39].main.humidity) + '%');
+
+            // console.log(daySixTemp);
+            
         })
     })
 
     
 })
+
+function incrementDate(dateInput,increment) {
+    var dateFormatTotime = new Date(dateInput);
+    var increasedDate = new Date(dateFormatTotime.getTime() +(increment *86400000));
+    increasedDate.format('MMM D, YYYY');
+    return increasedDate;
+}
