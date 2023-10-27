@@ -50,6 +50,8 @@ searchButton.on('click', function (event) {
     // console.log(buttonParent.children[0].value);
     searchText = buttonParent.children[0].value;
 
+    
+
     var geoCodeAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchText + '&limit=1&appid=' + apiKey;
 
     fetch(geoCodeAPI, {

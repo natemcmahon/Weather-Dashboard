@@ -4,3 +4,55 @@ header {
     background: #13293d;
     color: #fff;
   }
+
+#city-search {
+    margin: 10px;
+}
+
+#today-weather {
+    border-style: solid;
+    flex-wrap: wrap;
+    height: 300px;
+    align-items: left;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+.weather-content {
+    justify-content: left;
+    height: 100%;
+}
+
+#city-name {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+#current-date {
+    margin-bottom: 15px;
+    margin-left: 25px;
+}
+
+.weather-content p {
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.five-day {
+    border-style: solid;
+    border-width: 3px;
+    margin: 5px;
+    padding: 3px;
+}
+
+#title5 {
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#forecast5 {
+    margin: 20px;
+}
