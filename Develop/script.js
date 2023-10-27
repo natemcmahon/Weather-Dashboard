@@ -1,3 +1,4 @@
+var body = document.body;
 var pastSearchesList = document.getElementById('previousSearches');
 var searchButton = $('#search-button');
 var currentCity = $('#city-name');
@@ -5,6 +6,7 @@ var todayDate = $('#current-date');
 var todayTemp = $('#current-temp');
 var todayWind = $('#current-wind');
 var todayHumidity = $('#current-humidity');
+var historicSearches = $('#search-history');
 
 // Five Day
 var dateEl2 = $('#day-two-date');
@@ -31,6 +33,8 @@ var humidEl6 = $('#day-six-humidity');
 
 
 var searchText;
+var searchHistory = [];
+console.log(searchHistory);
 
 var latLongAPI;
 var apiKey = 'fd960d184c53e4f03c025257c7047935';
@@ -42,6 +46,18 @@ var dayFourDate = dayjs().add(3, "day").format('MMM D, YYYY');
 var dayFiveDate = dayjs().add(4, "day").format('MMM D, YYYY');
 var daySixDate = dayjs().add(5, "day").format('MMM D, YYYY');
 
+searchHistory = JSON.parse(localStorage.getItem("Search History String Array"));
+
+if (searchHistory.length > 0) {
+    console.log("yes");
+  
+}
+else {
+    console.log("no");
+}
+
+
+
 
 searchButton.on('click', function (event) {
     // console.log(event);
@@ -50,7 +66,28 @@ searchButton.on('click', function (event) {
     // console.log(buttonParent.children[0].value);
     searchText = buttonParent.children[0].value;
 
+    // local Storage setup
+    console.log(searchHistory);
+    console.log(searchText);
+    searchHistory.push(searchText);
+    console.log(searchHistory);
+    // clear duplicates from array
+
+    localStorage.setItem("Search History String Array", JSON.stringify(searchHistory));
+
+
+    // Setting local storage properly
+    // struggling to get from local storage and build HTML list
+    // historicSearches isn't populating as an HTML element, could try getElementById
+    for (i = 0; i < searchHistory.length; i++) {
+        var liEl = document.createElement("li");
+        liEl.setAttribute('class', 'past-search');
+        historicSearches.appendChild(liEl);
+        liEl.value = searchHistory[i];
     
+    }
+
+    //////////////////////////
 
     var geoCodeAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchText + '&limit=1&appid=' + apiKey;
 
@@ -61,11 +98,11 @@ searchButton.on('click', function (event) {
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
+        // console.log(data);
         var entryLat = data[0].lat;
-        console.log("your lat is: " + entryLat);
+        // console.log("your lat is: " + entryLat);
         var entryLong = data[0].lon;
-        console.log("your long is: " + entryLong);
+        // console.log("your long is: " + entryLong);
         
         latLongAPI = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + entryLat + '&lon=' + entryLong + '&limit=5&appid=' + apiKey;
         
@@ -76,12 +113,12 @@ searchButton.on('click', function (event) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            // console.log(data);
             var currentTemp = data.list[0].main.temp - 273.15;
             var currentHumidity = data.list[0].main.humidity;
             var currentWind = data.list[0].wind.speed;
 
-            console.log("current temp in Degrees C: " + currentTemp);
+            // console.log("current temp in Degrees C: " + currentTemp);
 
             currentCity.html(searchText);
             todayDate.html(currentDate);
