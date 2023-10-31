@@ -76,11 +76,11 @@ searchButton.on('click', function (event) {
     // local Storage setup
     console.log(searchHistory);
     console.log(searchText);
-    searchHistory.push(searchText);
-    console.log(searchHistory);
+    storedSearches.push(searchText);
+    console.log(storedSearches);
     // clear duplicates from array
 
-    localStorage.setItem("Search History String Array", JSON.stringify(searchHistory));
+    localStorage.setItem("Search History String Array", JSON.stringify(storedSearches));
 
 
 
@@ -88,12 +88,13 @@ searchButton.on('click', function (event) {
     // struggling to get from local storage and build HTML list
     // historicSearches isn't populating as an HTML element, could try getElementById
     for (i = 0; i < searchHistory.length; i++) {
-        var liEl = document.createElement("li");
+        var liEl = document.createElement("li"); // make button, not ordered list
         
         liEl.setAttribute('class', 'past-search');
-        liEl.innerHTML = searchHistory[i];
-        console.log(historicSearches[i]);
-        historicSearches.appendChild(liEl);
+        // set up event listener to re call weather api 
+        liEl.innerHTML = storedSearches[i];
+        console.log(storedSearches[i]);
+        storedSearches.appendChild(liEl);
     }
 
     //////////////////////////
