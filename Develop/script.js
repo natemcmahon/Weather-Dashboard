@@ -6,7 +6,8 @@ var todayDate = $('#current-date');
 var todayTemp = $('#current-temp');
 var todayWind = $('#current-wind');
 var todayHumidity = $('#current-humidity');
-var historicSearches = $('#search-history');
+// var historicSearches = $('#search-history');
+var historicSearches = document.getElementById('search-history');
 
 // Five Day
 var dateEl2 = $('#day-two-date');
@@ -34,7 +35,7 @@ var humidEl6 = $('#day-six-humidity');
 
 var searchText;
 var searchHistory = [];
-console.log(searchHistory);
+// console.log(searchHistory.length);
 
 var latLongAPI;
 var apiKey = 'fd960d184c53e4f03c025257c7047935';
@@ -46,14 +47,20 @@ var dayFourDate = dayjs().add(3, "day").format('MMM D, YYYY');
 var dayFiveDate = dayjs().add(4, "day").format('MMM D, YYYY');
 var daySixDate = dayjs().add(5, "day").format('MMM D, YYYY');
 
-searchHistory = JSON.parse(localStorage.getItem("Search History String Array"));
+console.log(typeof(searchHistory));
 
-if (searchHistory.length > 0) {
-    console.log("yes");
-  
-}
-else {
-    console.log("no");
+var storedSearches = JSON.parse(localStorage.getItem("Search History String Array"));
+
+console.log(storedSearches);
+console.log("type of searchHistory is: " + typeof(storedSearches));
+
+for (i = 0; i < storedSearches.length; i++) {
+    var liEl = document.createElement("li");
+    
+    liEl.setAttribute('class', 'past-search');
+    liEl.innerHTML = storedSearches[i];
+    console.log(storedSearches[i]);
+    historicSearches.appendChild(liEl);
 }
 
 
@@ -76,15 +83,17 @@ searchButton.on('click', function (event) {
     localStorage.setItem("Search History String Array", JSON.stringify(searchHistory));
 
 
+
     // Setting local storage properly
     // struggling to get from local storage and build HTML list
     // historicSearches isn't populating as an HTML element, could try getElementById
     for (i = 0; i < searchHistory.length; i++) {
         var liEl = document.createElement("li");
+        
         liEl.setAttribute('class', 'past-search');
+        liEl.innerHTML = searchHistory[i];
+        console.log(historicSearches[i]);
         historicSearches.appendChild(liEl);
-        liEl.value = searchHistory[i];
-    
     }
 
     //////////////////////////
@@ -164,4 +173,9 @@ function incrementDate(dateInput,increment) {
     var increasedDate = new Date(dateFormatTotime.getTime() +(increment *86400000));
     increasedDate.format('MMM D, YYYY');
     return increasedDate;
+}
+
+function removeDuplicates(arr) { 
+    return arr.filter((item, 
+        index) => arr.indexOf(item) === index); 
 }
